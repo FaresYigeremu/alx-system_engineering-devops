@@ -1,7 +1,4 @@
 #!/usr/bin/env bash
-
-# Display a list of all currently running processes, including those without a TTY,
-# in a user-oriented format with process hierarchy, and display its own PID.
 #display currently running processes
 
-ps -faux
+ps aux --forest
