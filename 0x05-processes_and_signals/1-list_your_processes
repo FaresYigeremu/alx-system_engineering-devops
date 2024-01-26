@@ -2,12 +2,6 @@
 
 # Display a list of all currently running processes, including those without a TTY,
 # in a user-oriented format with process hierarchy, and display its own PID.
+#display currently running processes
 
-# Get the PID of the current script
-SCRIPT_PID=$$
-
-# Display the list of processes
-ps -e --forest --no-headers | grep -v "$SCRIPT_PID"
-
-# Display the PID of the current script
-echo "My PID is: $SCRIPT_PID"
+ps -faux
