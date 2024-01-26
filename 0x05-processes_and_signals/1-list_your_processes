@@ -1,0 +1,13 @@
+#!/bin/bash
+
+# Display a list of all currently running processes, including those without a TTY,
+# in a user-oriented format with process hierarchy.
+
+# Use 'ps -e' to show all processes, for all users.
+# Use '--forest' to display the process hierarchy in a tree-like format.
+# Use '--no-headers' to remove the header line.
+# Use '--deselect <this-script's-pid>' to exclude this script's process from the list.
+
+PID_OF_THIS_SCRIPT=$$
+
+ps -e --forest --no-headers | grep -v "$PID_OF_THIS_SCRIPT"
