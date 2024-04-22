@@ -1,25 +1,31 @@
-#!usr/bin/python3
-''' a python script that export csv format'''
-
 import csv
 import requests
 import sys
 
-
-if __name__ == " __main__":
-
-    user_id = sys.argv[1]
-
+def export_to_csv(employee_id):
+    # Base URL for the JSONPlaceholder API
     url = "https://jsonplaceholder.typicode.com/"
 
-    user = requests.get(url + "users/{}".format(user_id)).json()
-
+    # Fetch user information using the provided employee ID
+    user = requests.get(url + "users/{}".format(employee_id)).json()
     username = user.get("username")
 
-    todos = requests.get(url + "todos", params={"userId": user_id}).json()
+    # Fetch the to-do list for the employee using the provided employee ID
+    todos = requests.get(url + "todos", params={"userId": employee_id}).json()
 
-    with open("{}.csv".format(user_id), "w", newline="") as csvfile:
+    # Prepare the CSV file name
+    csv_file_name = "{}.csv".format(employee_id)
 
+    # Write the data to the CSV file
+    with open(csv_file_name, "w", newline="") as csvfile:
         writer = csv.writer(csvfile, quoting=csv.QUOTE_ALL)
-       [writer.writerow([user_id, username, t.get("completed"), 
-           t.get("title")]) for t in todos]
+        for t in todos:
+            writer.writerow([employee_id, username, t.get("completed"), t.get("title")])
+
+if __name__ == "__main__":
+    if len(sys.argv) != 2:
+        print("Usage: python script.py EMPLOYEE_ID")
+        sys.exit(1)
+
+    employee_id = int(sys.argv[1])
+    export_to_csv(employee_id)
