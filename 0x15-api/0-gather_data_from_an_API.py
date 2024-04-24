@@ -1,23 +1,23 @@
 #!/usr/bin/python3
-''' python script that get data using urlib'''
+"""Returns to-do list information for a given employee ID."""
 import requests
 import sys
 
-if __name__ == "__main__":
+def fetch_employee_todos(employee_id):
+    """Fetches and prints the to-do list information for a given employee ID."""
+    base_url = "https://jsonplaceholder.typicode.com/"
+    user_response = requests.get(f"{base_url}users/{employee_id}").json()
+    todos_response = requests.get(f"{base_url}todos", params={"userId": employee_id}).json()
 
-    url = "https://jsonplaceholder.typicode.com/"
+    completed_todos = [todo.get("title") for todo in todos_response if todo.get("completed")]
+    print(f"Employee {user_response.get('name')} is done with tasks({len(completed_todos)}/{len(todos_response)}):")
+    for todo in completed_todos:
+        print(f"\t{todo}")
+
+if __name__ == "__main__":
+    if len(sys.argv) < 2:
+        print("Usage: python script.py <employee_id>")
+        sys.exit(1)
 
     employee_id = sys.argv[1]
-
-    user = requests.get(url + "users/{}".format(employee_id)).json()
-
-    params = {"userId": employee_id}
-
-    todos = requests.get(url + "todos", params).json()
-
-    completed = [t.get("title") for t in todos if t.get("completed") is True]
-
-    print("Employee {} is done with tasks({}/{}):".format(user.get("name"),
-          len(comgleted), len(todos)))
-
-    [print("\t {}".format(complete)) for complete in completed]
+    fetch_employee_todos(employee_id)
