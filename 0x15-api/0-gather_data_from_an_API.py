@@ -1,5 +1,4 @@
 #!/usr/bin/python3
-"""Returns to-do list information for a given employee ID."""
 import requests
 import sys
 
@@ -19,5 +18,6 @@ if __name__ == "__main__":
         print("Usage: python script.py <employee_id>")
         sys.exit(1)
 
-    employee_id = sys.argv[1]
+    employee_id = int(sys.argv[1])
     fetch_employee_todos(employee_id)
+
