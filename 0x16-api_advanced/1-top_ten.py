@@ -4,7 +4,7 @@ import requests
 def top_ten(subreddit):
     url = f"https://www.reddit.com/r/{subreddit}/hot/.json"
     
-    headers = {"User-Agent": "your_custom_user_agent"}
+    headers = {"User-Agent": "linux"}
     
     try:
         response = requests.get(url, headers=headers)
