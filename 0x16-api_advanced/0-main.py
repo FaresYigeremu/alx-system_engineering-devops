@@ -3,7 +3,7 @@
 0-main
 """
 import sys
-
+from 0-subs import number_of_subscribers
 if __name__ == '__main__':
     number_of_subscribers = __import__('0-subs').number_of_subscribers
     if len(sys.argv) < 2:
