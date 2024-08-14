@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""recursive function that queries the Reddit API and returns a list containing the titles of all hot articles for a given subreddit"""
+"""returns a list containing the titles of all hot articles"""
 from requests import get
 
 REDDIT = "https://www.reddit.com/"
@@ -7,7 +7,7 @@ HEADERS = {'user-agent': 'linux'}
 
 
 def recurse(subreddit, hot_list=[], after=""):
-    
+
     if after is None:
         return hot_list
 
