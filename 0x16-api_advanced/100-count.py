@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-""" function that parses the title of all hot articles, and prints a sorted count"""
+"""parses the title of all hot articles, and prints a sorted count"""
 
 
 import requests
